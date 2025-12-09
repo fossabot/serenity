@@ -4,8 +4,7 @@ serenity = library('serenity', [
 	'game.cpp',
 	'entity.cpp',
 	'component.cpp',
-	'system.cpp',
-	'time/ontick.cpp'
+	'system.cpp'
 ], include_directories: inc, dependencies: [dependency('sup')], install: true)
 serenity_dep = declare_dependency(link_with: serenity, dependencies: [dependency('sup')], include_directories: inc)
 

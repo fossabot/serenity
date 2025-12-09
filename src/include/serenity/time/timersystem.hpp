@@ -15,6 +15,7 @@ class TimerSystem : public Sup {
 	std::thread execution_thread;
 
 	std::chrono::milliseconds _delta;
+	bool exit = false;
 
 	template <int64_t hz = 60>
 	void loop(Game *g) {
@@ -26,7 +27,7 @@ class TimerSystem : public Sup {
 		auto nextFrame = system_clock::now();
 		auto lastFrame = nextFrame - frames{1};
 
-		while(true) {
+		while(!exit) {
 			this_thread::sleep_until(nextFrame);
 			_delta = duration_cast<milliseconds>(system_clock::now() - lastFrame);
 			for(auto e : g->children<Entity>()) e->update(this);
@@ -42,6 +43,12 @@ public:
 	void start() {
 		execution_thread = std::thread(&TimerSystem::loop<hz>, this, findParent<Game>());
 	}
+
+	void stop() {
+		exit = true;
+		execution_thread.join();
+	}
+
 
 	auto delta() { return _delta; }
 };

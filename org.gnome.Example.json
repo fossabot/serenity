@@ -5,6 +5,11 @@
     "sdk" : "org.freedesktop.Sdk",
     "command" : "serenity-example",
     "finish-args" : [
+  	"--socket=wayland",
+  	"--socket=fallback-x11",
+  	"--share=ipc",
+  	"--device=dri",
+  	"--socket=pulseaudio"
     ],
     "cleanup" : [
         "/include",

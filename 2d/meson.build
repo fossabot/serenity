@@ -1,10 +1,10 @@
 inc = include_directories('include')
 serenity2d = library('serenity2d', [
-#	'camera.cpp',
-	#'cameraentity.cpp',
-
+	'renderer.cpp',
+	'camera.cpp',
+	'cameraentity.cpp',
 ], include_directories: inc, dependencies: [dependency('sup'), dependency('sdl3'), serenity_dep], install: true)
-serenity2d_dep = declare_dependency(link_with: serenity, dependencies: [dependency('sup'), dependency('sdl3'), serenity_dep], include_directories: inc)
+serenity2d_dep = declare_dependency(link_with: serenity2d, dependencies: [dependency('sup'), dependency('sdl3'), serenity_dep], include_directories: inc)
 
 pkg = import('pkgconfig')
 pkg.generate(libraries : [serenity2d],
