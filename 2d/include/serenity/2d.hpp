@@ -1,3 +1,2 @@
 #pragma once
-#include "2d/renderer.hpp"
-#include "2d/customrender.hpp"
+#include <serenity/2d/painter.hpp>

@@ -4,11 +4,8 @@ project('serenity', ['cpp', 'c'],
   default_options: [ 'warning_level=2', 'werror=false', 'cpp_std=gnu++2a', ],
 )
 
-
-
-
-
-subdir('src')
+subdir('core')
+subdir('graphics')
 subdir('2d')
 
-subdir('example')
+subdir('examples')

@@ -1,9 +1,9 @@
 #include <serenity/core.hpp>
-#include <serenity/2d/renderer.hpp>
+#include <serenity/graphics/renderer.hpp>
 
 using namespace serenity;
 
-namespace serenity::d2 {
+namespace serenity::graphics {
 
 void Renderer::run() {
     win = SDL_CreateWindow(title, 640, 480, 0);

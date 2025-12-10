@@ -1,0 +1,1 @@
+install_data('main.pl', rename : 'serenity-example-launcher', install_dir : 'bin', install_mode : 'rwxr-xr-x')

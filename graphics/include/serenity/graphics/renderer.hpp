@@ -4,7 +4,7 @@
 #include <SDL3/SDL.h>
 
 namespace serenity {
-namespace d2 {
+namespace graphics {
 
 class Renderer : public Sup {
     SDL_Window *win;

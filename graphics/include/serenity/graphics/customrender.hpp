@@ -3,7 +3,7 @@
 #include <functional>
 
 namespace serenity {
-namespace d2 {
+namespace graphics {
 class Renderer;
 
 using CustomRender = serenity::Passthrough<Renderer>;

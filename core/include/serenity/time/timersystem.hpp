@@ -39,6 +39,10 @@ class TimerSystem : public Sup {
 public:
 	TimerSystem(Sup *parent) : Sup(parent) {}
 
+	~TimerSystem() {
+		if(!exit) stop();
+	}
+
 	template <int hz = 60>
 	void start() {
 		execution_thread = std::thread(&TimerSystem::loop<hz>, this, findParent<Game>());
