@@ -14,7 +14,7 @@ auto Painter::loadImage(const char *path) -> SDL_Texture* {
     if(!surface) return nullptr;
     auto tex = SDL_CreateTextureFromSurface(dynamic_cast<Renderer*>(parent())->renderer(), surface);
     SDL_DestroySurface(surface);
-    manage([&](){SDL_DestroyTexture(tex);});
+    manage([tex](){SDL_DestroyTexture(tex);});
     return tex;
 }
 

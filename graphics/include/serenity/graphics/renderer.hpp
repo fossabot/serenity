@@ -12,6 +12,8 @@ class Renderer : public Sup {
 
     const char *title;
 
+    bool _quit = false;
+
 public:
     Renderer(Sup *parent, const char *title) : Sup(parent), title(title) {}
 

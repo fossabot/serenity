@@ -21,9 +21,8 @@ void Renderer::run() {
     for(auto e : g->children<Entity>()) e->init(this);
 
     SDL_Event e;
-    bool quit = false;
-    while(!quit) {
-        while(SDL_PollEvent(&e)) if(e.type == SDL_EVENT_QUIT) quit = true;
+    while(!_quit) {
+        while(SDL_PollEvent(&e)) if(e.type == SDL_EVENT_QUIT) _quit = true;
 
         SDL_RenderClear(ren);
         for(auto e : g->children<Entity>()) e->update(this);
@@ -32,6 +31,7 @@ void Renderer::run() {
 }
 
 void Renderer::quit() {
+    _quit = true;
     SDL_Quit();
 }
 
