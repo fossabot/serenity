@@ -1,15 +1,15 @@
 [
    {
-      "dest": "perl-libs/ExtUtils-PkgConfig",
-      "sha256": "bbeaced995d7d8d10cfc51a3a5a66da41ceb2bc04fedcab50e10e6300e801c6e",
-      "type": "archive",
-      "url": "https://cpan.metacpan.org/authors/id/X/XA/XAOC/ExtUtils-PkgConfig-1.16.tar.gz"
-   },
-   {
       "dest": "perl-libs/ExtUtils-Depends",
       "sha256": "02b9a46450050ce19b325b23e46bb4ec644229d7f2d95044f67a86d8efacdc29",
       "type": "archive",
       "url": "https://cpan.metacpan.org/authors/id/E/ET/ETJ/ExtUtils-Depends-0.8002.tar.gz"
+   },
+   {
+      "dest": "perl-libs/ExtUtils-PkgConfig",
+      "sha256": "bbeaced995d7d8d10cfc51a3a5a66da41ceb2bc04fedcab50e10e6300e801c6e",
+      "type": "archive",
+      "url": "https://cpan.metacpan.org/authors/id/X/XA/XAOC/ExtUtils-PkgConfig-1.16.tar.gz"
    },
    {
       "dest": "perl-libs/Glib",
@@ -30,6 +30,12 @@
       "url": "https://cpan.metacpan.org/authors/id/X/XA/XAOC/Glib-IO-0.002.tar.gz"
    },
    {
+      "dest": "perl-libs/Hash-Ordered",
+      "sha256": "8dc36cd79155ae37ab8a3de5fd9120ffba9a31e409258c28529ec5251c59747b",
+      "type": "archive",
+      "url": "https://cpan.metacpan.org/authors/id/D/DA/DAGOLDEN/Hash-Ordered-0.014.tar.gz"
+   },
+   {
       "commands": [
          "set -e",
          "function make_install {",
@@ -44,11 +50,12 @@
          "        exit 1",
          "    fi",
          "}",
-         "(make_install perl-libs/ExtUtils-PkgConfig)",
          "(make_install perl-libs/ExtUtils-Depends)",
+         "(make_install perl-libs/ExtUtils-PkgConfig)",
          "(make_install perl-libs/Glib)",
          "(make_install perl-libs/Glib-Object-Introspection)",
-         "(make_install perl-libs/Glib-IO)"
+         "(make_install perl-libs/Glib-IO)",
+         "(make_install perl-libs/Hash-Ordered)"
       ],
       "dest": "perl-libs",
       "dest-filename": "install.sh",

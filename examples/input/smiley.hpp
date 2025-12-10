@@ -6,24 +6,27 @@
 
 using namespace std;
 using namespace serenity;
+using namespace serenity::math;
 using namespace serenity::time;
 using namespace serenity::graphics;
 using namespace serenity::twod;
 using namespace serenity::input;
 
-#define SPEED 1
+#define SPEED 10
 
 class Smiley : public Entity {
 	SDL_Texture *tex;
 
-	int x = 0;
-	int y = 0;
+	double actX = 0;
+	double actY = 0;
+	double x = 0;
+	double y = 0;
 	int w = 32;
 	int h = 32;
 
 	bool quit = false;
 
-	inline auto rect(Painter *p) {return p->rectangle(x, y, w, h);}
+	inline auto rect(Painter *p) {return p->rectangle(actX, actY, w, h);}
 public:
 	Smiley(Game *g) : Entity(g, "smiley") {
 		new OnTick(this, OnTick::none, [this](TimerSystem *) {
@@ -42,6 +45,9 @@ public:
 			auto p = r->findChild<Painter>();
 			tex = p->loadImage(SMILEY_PATH);
 	    	}, [this](Renderer *r) {
+	    		actX = lerp(actX, x, 0.0001);
+	    		actY = lerp(actY, y, 0.0001);
+
 	    		auto p = r->findChild<Painter>();
 	    		auto target = rect(p);
 			p->draw(tex, &target);

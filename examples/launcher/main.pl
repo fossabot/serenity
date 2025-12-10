@@ -1,6 +1,8 @@
 #!/usr/bin/env perl
 use Glib::IO;
 use Glib::Object::Introspection;
+use Hash::Ordered;
+
 Glib::Object::Introspection->setup(
   basename => 'Gtk',
   version => '4.0',
@@ -22,9 +24,9 @@ sub launch_example {
 	}
 }
 
-my %examples = qw(
-	Lettuce serenity-example-lettuce
-	Input serenity-example-input
+my $examples = Hash::Ordered->new(
+	Lettuce => "serenity-example-lettuce",
+	Input => "serenity-example-input"
 );
 
 
@@ -45,10 +47,10 @@ $app->signal_connect(
     $box->set_margin_top(10);
     $box->set_margin_bottom(10);
 
-    foreach my $example (keys %examples) {
+    foreach my $example ($examples->keys) {
 	    my $btn = Gtk4::Button->new_with_label($example);
 	    # … which closes the window when clicked
-	    $btn->signal_connect(clicked => sub { launch_example($examples{$example}); });
+	    $btn->signal_connect(clicked => sub { launch_example($examples->get($example)); });
 
 	    $box->append($btn);
     }
