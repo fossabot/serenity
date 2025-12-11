@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "smiley.hpp"
+#include "player.hpp"
 #include <serenity/core.hpp>
 #include <serenity/graphics.hpp>
 #include <serenity/2d.hpp>
@@ -24,11 +24,13 @@ int main() {
 
     auto cam = new Camera(&g, vec2(WIDTH, HEIGHT));
 
-    auto s = new Smiley(&g);
+    auto sprites = Spritesheet::forScene(&g, TILEMAP_PATH, vec2(32, 32));
 
-    cam->follow(s, 0.01);
+    auto p = new Player(&g, sprites);
 
-    auto r = new Renderer(&g, "Serenity Camera Example", WIDTH, HEIGHT);
+    cam->follow(p, 0.01);
+
+    auto r = new Renderer(&g, "Don't Look Back", WIDTH, HEIGHT);
     new Painter(r);
 
     g.findChild<TimerSystem>()->start<120>();

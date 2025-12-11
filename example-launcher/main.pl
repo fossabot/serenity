@@ -17,7 +17,8 @@ Glib::Object::Introspection->setup(
 my $examples = Hash::Ordered->new(
 	Lettuce => "serenity-example-lettuce",
 	Input => "serenity-example-input",
-	Camera => "serenity-example-camera"
+	Camera => "serenity-example-camera",
+	"Don't Look Back" => "serenity-example-dontlookback"
 );
 
 

@@ -24,7 +24,9 @@ public:
 	void init(Sup *s);
 
 	auto name() -> std::optional<std::string>;
-	auto load(serenity::math::Vec2i position) -> Sprite*;
+	auto load(serenity::Entity*, serenity::math::Vec2i position) -> Sprite*;
+
+	static auto forScene(Scene *s, const char *imageName, serenity::math::Vec2f imageSize) -> Spritesheet*;
 };
 
 }

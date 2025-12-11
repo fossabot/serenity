@@ -30,8 +30,12 @@ auto Spritesheet::name() -> optional<string> {
     return _image;
 }
 
-auto Spritesheet::load(serenity::math::Vec2i position) -> Sprite* {
-    return new Sprite((Entity*)parent(), this, position * _imageSize, _imageSize);
+auto Spritesheet::load(Entity *e, serenity::math::Vec2i position) -> Sprite* {
+    return new Sprite(e, this, position * _imageSize, _imageSize);
+}
+
+auto Spritesheet::forScene(Scene *s, const char *imageName, serenity::math::Vec2f imageSize) -> Spritesheet* {
+    return new Spritesheet(new Entity(s), imageName, imageSize);
 }
 
 }

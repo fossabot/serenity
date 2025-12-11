@@ -33,7 +33,7 @@ Sprite *Sprite::load(serenity::Entity *e, const char *imageName, serenity::math:
     auto sheet = e->findChild<Spritesheet>(imageName);
     if(!sheet) sheet = new Spritesheet(e, imageName, size);
 
-    return sheet->load(vec2(0, 0));
+    return sheet->load(e, vec2(0, 0));
 }
 
 }
