@@ -3,3 +3,4 @@
 #include <serenity/2d/transform.hpp>
 #include <serenity/2d/camera.hpp>
 #include <serenity/2d/sprite.hpp>
+#include <serenity/2d/spritesheet.hpp>

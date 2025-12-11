@@ -1,5 +1,7 @@
 #pragma once
 #include <sup.hpp>
+#include <string>
+#include <optional>
 
 #include "entity.hpp"
 #include "game.hpp"
@@ -11,9 +13,9 @@ protected:
 	auto game() const -> Game* { return findParent<Game>(); }
 
 	template <typename C>
-	auto getComponent() const -> C* {
+	auto getComponent(std::optional<std::string> name = std::nullopt) const -> C* {
 		auto e = findParent<Entity>();
-		if(e) return e->findChild<C>();
+		if(e) return e->findChild<C>(name);
 		return nullptr;
 	}
 

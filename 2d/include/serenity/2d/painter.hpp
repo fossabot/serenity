@@ -30,6 +30,7 @@ public:
 	auto loadImage(const char *path) -> SDL_Texture*;
 
 	void draw(SDL_Texture*, const SDL_FRect*);
+	void draw(SDL_Texture*, const SDL_FRect*, const SDL_FRect*);
 };
 
 }

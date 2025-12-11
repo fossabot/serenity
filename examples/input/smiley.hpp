@@ -40,6 +40,6 @@ public:
 			pos() = lerp(pos(), go, 0.025);
 	    	});
 
-		new Sprite(this, SMILEY_PATH, vec2(32, 32));
+		Sprite::load(this, SMILEY_PATH, vec2(32, 32));
 	}
 };

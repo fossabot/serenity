@@ -10,27 +10,30 @@ using namespace serenity::math;
 namespace serenity {
 namespace twod {
 
-Sprite::Sprite(Entity *e, const char *image, Vec2f size)
+Sprite::Sprite(Entity *e, Spritesheet *sheet, Vec2f position, Vec2f size)
     : Component(e)
-    , _image(image)
+    , _sheet(sheet)
+    , _pos(position)
     , _size(size)
     {}
-
-void Sprite::init(Sup *s) {
-    auto r = dynamic_cast<Renderer*>(s);
-    if(!r) return;
-    auto p = r->findChild<Painter>();
-	tex = p->loadImage(_image);
-}
 
 void Sprite::update(Sup *s) {
     auto r = dynamic_cast<Renderer*>(s);
     if(!r) return;
+
     auto p = r->findChild<Painter>();
     auto tr = getComponent<Transform>();
 
+    auto src = rectangle(_pos, _size);
 	auto target = rectangle(tr->screenPosition(), _size);
-	if(tex) p->draw(tex, &target);
+	if(_sheet->tex) p->draw(_sheet->tex, &src, &target);
+}
+
+Sprite *Sprite::load(serenity::Entity *e, const char *imageName, serenity::math::Vec2f size) {
+    auto sheet = e->findChild<Spritesheet>(imageName);
+    if(!sheet) sheet = new Spritesheet(e, imageName, size);
+
+    return sheet->load(vec2(0, 0));
 }
 
 }

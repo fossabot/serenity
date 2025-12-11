@@ -19,9 +19,13 @@ auto Painter::loadImage(const char *path) -> SDL_Texture* {
 }
 
 void Painter::draw(SDL_Texture* tex, const SDL_FRect *dest) {
+    draw(tex, nullptr, dest);
+}
+
+void Painter::draw(SDL_Texture* tex, const SDL_FRect *src, const SDL_FRect *dest) {
     auto r = dynamic_cast<Renderer*>(parent());
     if(!r) return;
-    SDL_RenderTexture(r->renderer(), tex, nullptr, dest);
+    SDL_RenderTexture(r->renderer(), tex, src, dest);
 }
 
 

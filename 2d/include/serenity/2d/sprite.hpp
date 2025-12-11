@@ -5,21 +5,30 @@ namespace serenity {
 namespace twod {
 
 class Transform;
+class Spritesheet;
 
 class Sprite : public serenity::Component
 {
-	const char *_image;
-	SDL_Texture *tex;
+	Spritesheet *_sheet;
 
+	serenity::math::Vec2f _pos;
 	serenity::math::Vec2f _size;
 
-public:
-	Sprite(serenity::Entity *e, const char *imageName, serenity::math::Vec2f);
+	Sprite(serenity::Entity*, Spritesheet *, serenity::math::Vec2f, serenity::math::Vec2f);
 
-	void init(Sup *);
+	friend class Spritesheet;
+
+public:
+
+	static Sprite *load(serenity::Entity*, const char *imageName, serenity::math::Vec2f size);
+
 	void update(Sup *);
 
 	inline auto size() -> decltype(_size) {return _size;}
+
+	inline auto box() -> serenity::math::Vec4f {
+		return serenity::math::vec4(getComponent<Transform>()->position, size());
+	}
 };
 
 }

@@ -18,6 +18,31 @@ struct Vec {
 		return components[i];
 	}
 
+	bool operator==(Vec<len, T> other) const {
+		bool res;
+		for(unsigned int i = 0; i < len; i++) {
+			res = res && components[i] == other[i];
+		}
+		return res;
+	}
+
+	bool operator>(Vec<len, T> other) const {
+		bool res;
+		for(unsigned int i = 0; i < len; i++) {
+			res = res || components[i] > other[i];
+		}
+		return res;
+	}
+
+	bool operator<(Vec<len, T> other) const {
+		bool res;
+		for(unsigned int i = 0; i < len; i++) {
+			res = res || components[i] < other[i];
+		}
+		return res;
+	}
+
+
 	Vec<len, T> operator+(Vec<len, T> other) const {
 		Vec<len, T> res;
 		for(unsigned int i = 0; i < len; i++) {
@@ -66,10 +91,26 @@ struct Vec {
 		return res;
 	}
 
+	Vec<len, T> operator*(Vec<len, T> other) const {
+		Vec<len, T> res;
+		for(unsigned int i = 0; i < len; i++) {
+			res[i] = components[i] * other[i];
+		}
+		return res;
+	}
+
 	Vec<len, T> operator/(T divisor) const {
 		Vec<len, T> res;
 		for(unsigned int i = 0; i < len; i++) {
 			res[i] = components[i] / divisor;
+		}
+		return res;
+	}
+
+	Vec<len, T> operator/(Vec<len, T> other) const {
+		Vec<len, T> res;
+		for(unsigned int i = 0; i < len; i++) {
+			res[i] = components[i] / other[i];
 		}
 		return res;
 	}
@@ -151,8 +192,50 @@ inline Vec4<T> vec4(T x, T y, T z, T t) {
 }
 
 template <typename T>
+inline Vec4<T> vec4(Vec2<T> v1, Vec2<T> v2) {
+	Vec4<T> res;
+	res[x] = v1[x];
+	res[y] = v1[y];
+	res[z] = v2[x];
+	res[t] = v2[y];
+	return res;
+}
+
+template <typename T>
 inline auto lerp(T a, T b, float t) -> T {
     return a + t * (b - a);
+}
+
+namespace collision {
+
+template <typename T>
+inline auto leftEdge(Vec4<T> box) -> T {
+	return box[x];
+}
+
+template <typename T>
+inline auto topEdge(Vec4<T> box) -> T {
+	return box[y];
+}
+
+template <typename T>
+inline auto rightEdge(Vec4<T> box) -> T {
+	return box[x] + box[z];
+}
+
+template <typename T>
+inline auto bottomEdge(Vec4<T> box) -> T {
+	return box[y] + box[t];
+}
+
+template <typename T>
+inline auto overlaps(Vec4<T> box1, Vec4<T> box2) -> bool {
+	return !(  topEdge(box1) > bottomEdge(box2)
+		|| topEdge(box2) > bottomEdge(box1)
+		|| leftEdge(box1) > rightEdge(box2)
+		|| leftEdge(box2) > rightEdge(box1));
+}
+
 }
 
 }
