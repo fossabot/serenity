@@ -16,15 +16,14 @@ using namespace serenity::input;
 class Smiley : public Entity {
 	SDL_Texture *tex;
 
-	Vec2<float> go;
-	Vec2<float> &pos() {return findChild<Transform>()->position;};
+	Vec2f go;
 
 	bool quit = false;
 public:
 	Smiley(Game *g) : Entity(g, "smiley") {
-		new Transform(this);
+		auto tr = new Transform(this);
 
-		new OnTick(this, OnTick::none, [this](TimerSystem *) {
+		new OnTick(this, OnTick::none, [this, tr](TimerSystem *) {
 			auto k = keyboard::state();
 
 			if(k[SDL_SCANCODE_W]) go[y] -= SPEED;
@@ -37,7 +36,7 @@ public:
 				return;
 			}
 
-			pos() = lerp(pos(), go, 0.025);
+			tr->position(lerp(tr->position(), go, 0.025));
 	    	});
 
 		Sprite::load(this, SMILEY_PATH, vec2(32, 32));

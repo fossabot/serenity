@@ -4,3 +4,4 @@
 #include <serenity/2d/camera.hpp>
 #include <serenity/2d/sprite.hpp>
 #include <serenity/2d/spritesheet.hpp>
+#include <serenity/2d/collisionbox.hpp>

@@ -12,21 +12,18 @@ using namespace serenity::graphics;
 using namespace serenity::twod;
 using namespace serenity::input;
 
-#define SPEED 5
-
 class Player : public Entity {
-	float &x() {return findChild<Transform>()->position[math::x];};
-	float &y() {return findChild<Transform>()->position[math::y];};
+	float speed = 4;
 public:
 	Player(Game *g, Spritesheet *sprites) : Entity(g, "smiley") {
-		new Transform(this);
-		new OnTick(this, OnTick::none, [this](TimerSystem *) {
+		auto tr = new Transform(this);
+		new OnTick(this, OnTick::none, [this, tr](TimerSystem *) {
 			auto k = keyboard::state();
 
-			if(k[SDL_SCANCODE_W]) y() -= SPEED;
-			if(k[SDL_SCANCODE_A]) x() -= SPEED;
-			if(k[SDL_SCANCODE_S]) y() += SPEED;
-			if(k[SDL_SCANCODE_D]) x() += SPEED;
+			if(k[SDL_SCANCODE_W]) tr->translate(0, -speed);
+			if(k[SDL_SCANCODE_A]) tr->translate(-speed, 0);
+			if(k[SDL_SCANCODE_S]) tr->translate(0, speed);
+			if(k[SDL_SCANCODE_D]) tr->translate(speed, 0);
 
 			if(k[SDL_SCANCODE_Q]) findParent<Game>()->findChild<Renderer>()->quit();
 	    	});

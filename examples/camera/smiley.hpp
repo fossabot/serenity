@@ -15,18 +15,16 @@ using namespace serenity::input;
 #define SPEED 5
 
 class Smiley : public Entity {
-	float &x() {return findChild<Transform>()->position[math::x];};
-	float &y() {return findChild<Transform>()->position[math::y];};
 public:
 	Smiley(Game *g) : Entity(g, "smiley") {
-		new Transform(this);
-		new OnTick(this, OnTick::none, [this](TimerSystem *) {
+		auto tr = new Transform(this);
+		new OnTick(this, OnTick::none, [this, tr](TimerSystem *) {
 			auto k = keyboard::state();
 
-			if(k[SDL_SCANCODE_W]) y() -= SPEED;
-			if(k[SDL_SCANCODE_A]) x() -= SPEED;
-			if(k[SDL_SCANCODE_S]) y() += SPEED;
-			if(k[SDL_SCANCODE_D]) x() += SPEED;
+			if(k[SDL_SCANCODE_W]) tr->translate(0, -SPEED);
+			if(k[SDL_SCANCODE_A]) tr->translate(-SPEED, 0);
+			if(k[SDL_SCANCODE_S]) tr->translate(0, SPEED);
+			if(k[SDL_SCANCODE_D]) tr->translate(SPEED, 0);
 
 			if(k[SDL_SCANCODE_Q]) findParent<Game>()->findChild<Renderer>()->quit();
 	    	});

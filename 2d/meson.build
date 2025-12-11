@@ -13,7 +13,8 @@ serenity_2d = library('serenity-2d', [
 	'transform.cpp',
 	'camera.cpp',
 	'sprite.cpp',
-	'spritesheet.cpp'
+	'spritesheet.cpp',
+	'collisionbox.cpp',
 ], include_directories: inc, dependencies: deps, install: true)
 serenity_2d_dep = declare_dependency(link_with: serenity_2d, dependencies: deps, include_directories: inc)
 

@@ -27,7 +27,7 @@ public:
 	inline auto size() -> decltype(_size) {return _size;}
 
 	inline auto box() -> serenity::math::Vec4f {
-		return serenity::math::vec4(getComponent<Transform>()->position, size());
+		return serenity::math::vec4(getComponent<Transform>()->position(), size());
 	}
 };
 

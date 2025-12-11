@@ -17,7 +17,7 @@ Camera::Camera(Scene *parent, Vec2f screenSize, optional<string> name)
 
     new OnTick(this, OnTick::none, [tr, screenSize, this](TimerSystem*) {
         if(following) {
-            tr->position = lerp(tr->position, following->position - (screenSize/2), lerpFactor);
+            tr->position(lerp(tr->position(), following->position() - (screenSize/2), lerpFactor));
         }
     });
 }
