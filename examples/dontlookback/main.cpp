@@ -31,7 +31,7 @@ int main() {
     new Tile(&g, sprites, vec2(0, 50));
 
     auto p = new Player(&g, sprites);
-    cam->follow(p, 0.01);
+    cam->follow(p, 0.02);
 
     new Collectible(&g, sprites, vec2(-50, -50));
 

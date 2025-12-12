@@ -42,6 +42,7 @@ public:
 					speed += .2;
 					ph->jumpSpeed += .2;
 					cout << "[collectible] " << speed << endl;
+					findParent<Game>()->findChild<Camera>()->follow(this, 0.005 * speed);
 					c->parent()->remove(c);
 				}
 			}
